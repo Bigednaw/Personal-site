@@ -120,7 +120,9 @@
     background:linear-gradient(135deg,#e2e2e6,#c9c9ce);
     display:flex; align-items:center; justify-content:center;
     font-size:13px; color:var(--gray); border:1px solid var(--line);
+    overflow:hidden;
   }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; }
   .btn-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
   .btn{
     padding:12px 24px; border-radius:980px; font-size:15px; font-weight:500;
@@ -207,9 +209,22 @@
     display:grid; grid-template-columns:1fr; margin-top:24px;
   }
   .project-shot{
-    height:220px; background:linear-gradient(135deg,var(--off-white),#e7e7ea);
-    display:flex; align-items:center; justify-content:center; color:var(--gray); font-size:13px;
+    position:relative;
+    height:220px; overflow:hidden;
+    background:linear-gradient(135deg,var(--off-white),#e7e7ea);
   }
+  .project-shot img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; transition:opacity .8s ease;
+  }
+  .project-shot img.active{ opacity:1; }
+  .project-shot-dots{
+    position:absolute; bottom:12px; left:0; right:0; display:flex; justify-content:center; gap:6px; z-index:2;
+  }
+  .project-shot-dots span{
+    width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.6); transition:background .3s ease;
+  }
+  .project-shot-dots span.active{ background:#fff; }
   .project-body{ padding:28px 32px; }
   .project-meta{ display:flex; flex-wrap:wrap; gap:8px; margin:14px 0; }
   .tag{ font-size:12px; padding:6px 12px; border-radius:980px; background:var(--off-white); color:var(--black); }
@@ -290,7 +305,7 @@ const SITE = {
   email: "adeyefawande@yahoo.com",
   phone: "(403) 926-9554",
   location: "Calgary, Alberta, Canada",
-  calendlyUrl: "https://calendly.com/your-handle/intro-call", // swap for your real Calendly / Microsoft Bookings link
+  calendlyUrl: "https://calendly.com/ola-wande", // swap for your real Calendly / Microsoft Bookings link
   socials: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/ola-wande/" }, // add your real LinkedIn URL
   ],
@@ -324,41 +339,46 @@ const SITE = {
       detail: "Performed field inspections and tracked progress against schedules and contract documents on civil construction works. Maintained daily site records covering labor productivity, material usage, and activity sequencing. Coordinated between site crews, subcontractors, and engineering teams to resolve technical and QA/QC issues, supporting deficiency close-out and safe work practices." },
   ],
 
+  headshot: "images/headshot1.jpg",
+
   projects: [
     { title: "CNRL GEN3 SAGD Program & GEN4 CSS Program", stack: ["Primavera P6", "Cost Forecasting", "RFI Management"],
       desc: "Project Coordinator for mechanical, pipe spool, and skid fabrication across two concurrent programs in Alberta.",
-      outcome: "$15M+ CAD (GEN3) and $20M+ CAD (GEN4) — tracked cost, schedule, and forecasting; coordinated subcontractors and vendors; maintained RFIs, contract documentation, and drawing review/submission across both programs." },
+      outcome: "$15M+ CAD (GEN3) and $20M+ CAD (GEN4) — tracked cost, schedule, and forecasting; coordinated subcontractors and vendors; maintained RFIs, contract documentation, and drawing review/submission across both programs.",
+      images: ["images/projectimage1.jpg", "images/projectimage2.jpg", "images/projectimage3.jpg"] },
     { title: "Shell Well Pad Program", stack: ["Subcontractor Coordination", "Schedule Tracking", "Change Orders"],
       desc: "Project Coordinator for well pad construction and mechanical works.",
-      outcome: "$18M+ CAD — maintained project administration files, supported subcontractor coordination and schedule tracking, and built cost estimates for change orders." },
+      outcome: "$18M+ CAD — maintained project administration files, supported subcontractor coordination and schedule tracking, and built cost estimates for change orders.",
+      images: ["images/projectimage4.jpg", "images/projectimage5.jpg", "images/projectimage6.jpg"] },
     { title: "Cenovus Pipe Spool Fabrication & Enerflex Wolf Modules", stack: ["Material Takeoffs", "Primavera P6", "Supplier Coordination"],
       desc: "Project Coordinator preparing material takeoffs and quantity-based pricing across two fabrication projects.",
-      outcome: "$3M+ CAD and $5M+ CAD — supported cost tracking and forecasting, coordinated suppliers and internal drafting teams, and built and managed schedules using Primavera P6." },
+      outcome: "$3M+ CAD and $5M+ CAD — supported cost tracking and forecasting, coordinated suppliers and internal drafting teams, and built and managed schedules using Primavera P6.",
+      images: ["images/projectimage7.jpg", "images/projectimage8.jpg", "images/projectimage9.jpg"] },
   ],
 
   skills: {
     technical: [
-      { name: "Pipe & Material Takeoffs", level: 90 },
+      { name: "Pipe & Material Takeoffs", level: 70 },
       { name: "Drawing / Contract Document Review", level: 85 },
-      { name: "QA/QC & Deficiency Tracking", level: 80 },
+      { name: "QA/QC & Deficiency Tracking", level: 70 },
       { name: "Civil Construction Inspection", level: 80 },
     ],
     projectManagement: [
-      { name: "Scheduling (Primavera P6)", level: 90 },
-      { name: "Cost Tracking & Forecasting", level: 90 },
-      { name: "Change Order Management", level: 85 },
+      { name: "Scheduling (Primavera P6)", level: 60 },
+      { name: "Cost Tracking & Forecasting", level: 100 },
+      { name: "Change Order Management", level: 100 },
       { name: "Procurement & Estimating", level: 85 },
     ],
     software: [
-      { name: "Primavera P6", level: 90 },
-      { name: "MS Project", level: 75 },
+      { name: "Primavera P6", level: 60 },
+      { name: "Blue Beam Revu", level: 75 },
       { name: "AutoCAD", level: 65 },
       { name: "MS Excel / Office", level: 90 },
     ],
     soft: [
       { name: "Stakeholder Coordination", level: 90 },
       { name: "Communication", level: 85 },
-      { name: "Problem Solving", level: 85 },
+      { name: "Problem Solving", level: 95 },
       { name: "Attention to Detail", level: 90 },
     ],
   },
@@ -403,7 +423,7 @@ const SITE = {
 <!-- ========== HOME / HERO ========== -->
 <section class="hero" id="home">
   <div class="wrap">
-    <div class="hero-photo" id="hero-photo">Headshot</div>
+    <div class="hero-photo" id="hero-photo"><img id="hero-photo-img" src="" alt="Headshot" /></div>
     <h1 id="hero-name"></h1>
     <p class="role" id="hero-role"></p>
     <p class="lede" id="hero-tagline" style="margin-left:auto;margin-right:auto;"></p>
@@ -581,7 +601,7 @@ const SITE = {
     <h2>Let's find time to talk</h2>
     <p class="lede" style="margin:16px auto 32px;">Pick a slot that works for you — no back-and-forth emails needed.</p>
     <a id="calendly-link" class="btn btn-primary" target="_blank" rel="noopener">Open Scheduling Page</a>
-    <p style="font-size:13px; margin-top:14px; color:var(--gray);">Replace the scheduling link in <code>SITE.calendlyUrl</code> with your Calendly or Microsoft Bookings page.</p>
+    <p style="font-size:13px; margin-top:14px; color:var(--gray);">
   </div>
 </section>
 
@@ -637,6 +657,7 @@ const SITE = {
   $("hero-name").textContent = SITE.name;
   $("hero-role").textContent = SITE.role;
   $("hero-tagline").textContent = SITE.tagline;
+  $("hero-photo-img").src = SITE.headshot;
   $("contact-email").textContent = "Prefer email? Reach me directly at " + SITE.email;
 
   // ---------- stats ----------
@@ -706,8 +727,17 @@ const SITE = {
   const projectsList = $("projects-list");
   SITE.projects.forEach(p => {
     const card = el("div", "project-card");
+    const imgs = (p.images || []).map((src, i) =>
+      `<img src="${src}" alt="${p.title} photo ${i + 1}" class="${i === 0 ? "active" : ""}" />`
+    ).join("");
+    const dots = (p.images || []).map((_, i) =>
+      `<span class="${i === 0 ? "active" : ""}"></span>`
+    ).join("");
     card.innerHTML = `
-      <div class="project-shot">Project screenshot placeholder</div>
+      <div class="project-shot">
+        ${imgs}
+        <div class="project-shot-dots">${dots}</div>
+      </div>
       <div class="project-body">
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
@@ -716,6 +746,21 @@ const SITE = {
       </div>
     `;
     projectsList.appendChild(card);
+
+    // Auto-advancing slideshow: cycles to the next image every 3 seconds.
+    if (p.images && p.images.length > 1){
+      const shot = card.querySelector(".project-shot");
+      const slides = shot.querySelectorAll("img");
+      const dotEls = shot.querySelectorAll(".project-shot-dots span");
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove("active");
+        dotEls[idx].classList.remove("active");
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add("active");
+        dotEls[idx].classList.add("active");
+      }, 3000);
+    }
   });
 
   // ---------- interests ----------
